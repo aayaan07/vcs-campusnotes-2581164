@@ -12,6 +12,12 @@ const initialNotes = [
   }
 ];
 
+function escapeHTML(str) {
+  const div = document.createElement("div");
+  div.innerText = str;
+  return div.innerHTML;
+}
+
 function displayNotes(notes) {
   const notesContainer = document.getElementById("notes-list");
   if (!notesContainer) return;
@@ -22,10 +28,10 @@ function displayNotes(notes) {
     item.className = "note-item";
     item.innerHTML = `
       <div class="note-header">
-        <h3>${note.title}</h3>
-        <span class="badge">${note.category}</span>
+        <h3>${escapeHTML(note.title)}</h3>
+        <span class="badge">${escapeHTML(note.category)}</span>
       </div>
-      <p class="note-body">${note.content}</p>
+      <p class="note-body">${escapeHTML(note.content)}</p>
     `;
     notesContainer.appendChild(item);
   });
@@ -38,13 +44,24 @@ document.addEventListener("DOMContentLoaded", () => {
   if (form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      const title = document.getElementById("note-title").value;
-      const category = document.getElementById("note-category").value;
-      const content = document.getElementById("note-content").value;
+      const titleInput = document.getElementById("note-title");
+      const categoryInput = document.getElementById("note-category");
+      const contentInput = document.getElementById("note-content");
+
+      const title = titleInput.value.trim();
+      const category = categoryInput.value.trim();
+      const content = contentInput.value.trim();
+
+      // Bugfix: Prevent empty or whitespace-only note submission
+      if (!title || !content) {
+        alert("Please provide both a title and content for the note.");
+        return;
+      }
 
       initialNotes.push({ title, category, content });
       displayNotes(initialNotes);
       form.reset();
+      titleInput.focus();
     });
   }
 });
