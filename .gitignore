@@ -1,0 +1,13 @@
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Environment variables & local configs
+.env
+.env.local
+
+# Dependency and cache directories
+node_modules/
+
+# Ignore log files (new file type)
+*.log
