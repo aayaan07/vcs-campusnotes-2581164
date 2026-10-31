@@ -1,11 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VCS CampusNotes</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>VCS CampusNotes - Aayaan Kumar 2581164</h1>
+  <div class="container">
+    <header class="app-header">
+      <h1>VCS CampusNotes - Aayaan Kumar 2581164</h1>
+      <p class="subtitle">Quickly capture and organize campus study notes</p>
+    </header>
+
+    <main>
+      <section class="card form-section">
+        <h2>Add New Note</h2>
+        <form id="note-form">
+          <div class="form-group">
+            <label for="note-title">Title</label>
+            <input type="text" id="note-title" placeholder="e.g. DBMS Unit 3 Revision" required>
+          </div>
+          <div class="form-group">
+            <label for="note-category">Category</label>
+            <select id="note-category">
+              <option value="Lecture">Lecture</option>
+              <option value="Lab">Lab</option>
+              <option value="Assignment">Assignment</option>
+              <option value="Exam">Exam</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="note-content">Note Content</label>
+            <textarea id="note-content" rows="4" placeholder="Enter key points or summary..." required></textarea>
+          </div>
+          <button type="submit" id="submit-btn" class="btn primary-btn">Add Note</button>
+        </form>
+      </section>
+
+      <section class="notes-section">
+        <h2>Campus Notes List</h2>
+        <div id="notes-list" class="notes-grid">
+          <!-- Dynamically populated notes -->
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="app.js"></script>
 </body>
 </html>
